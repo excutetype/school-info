@@ -1,18 +1,18 @@
-import SelectInfoBtn from "components/SelectInfoBtn";
-import styles from "pages/Home.module.css";
+import SelectInfo from "components/home/SelectInfo";
+import styles from "./Home.module.css";
 
 function Menu() {
   return (
     <div className={styles.menu}>
-      <SelectInfoBtn
+      <SelectInfo
         text="급식표"
         description="급식 메뉴를 알려줍니다."
-        pageLocation="/cafeteria"
+        pageLocation="/info?contentType=cafeteria"
       />
-      <SelectInfoBtn
+      <SelectInfo
         text="시간표"
         description="금일 시간표를 알려줍니다."
-        pageLocation="/schedule"
+        pageLocation="/info?contentType=schedule"
       />
     </div>
   );

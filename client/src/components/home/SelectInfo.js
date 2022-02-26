@@ -1,4 +1,4 @@
-import styles from "components/SelectInfoBtn.module.css";
+import styles from "./SelectInfo.module.css";
 
 function SelectInfoBtn({ text, description, pageLocation }) {
   return (

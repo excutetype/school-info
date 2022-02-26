@@ -1,8 +1,8 @@
 import { useState } from "react";
 import axios from "axios";
-import { setLocalStorage } from "custom_module";
 import clsx from "clsx";
-import styles from "pages/SchoolData.module.css";
+import { setLocalStorage } from "custom_module";
+import styles from "./SchoolData.module.css";
 
 function Home() {
   let [province, setProvince] = useState("");

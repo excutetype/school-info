@@ -1,16 +1,8 @@
-.cafeteria {
+.Info {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
-
-.iconBox {
-  margin: 30px;
-}
-
-.icon {
-  width: 5rem;
 }
 
 .content {

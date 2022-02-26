@@ -1,0 +1,9 @@
+.scheduleTable {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+.scheduleTableData {
+  padding: 8px 25px 8px 25px;
+  border-bottom: 1px solid black;
+}
