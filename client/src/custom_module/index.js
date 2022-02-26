@@ -12,5 +12,12 @@ function isExistLocalStorage(items) {
   }
   return true;
 }
+function getLocalStorage(items) {
+  let result = {};
+  for (let item of items) {
+    result[item] = window.localStorage.getItem(item);
+  }
+  return result;
+}
 
-export { setLocalStorage, isExistLocalStorage };
+export { setLocalStorage, isExistLocalStorage, getLocalStorage };

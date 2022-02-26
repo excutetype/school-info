@@ -1,8 +1,8 @@
 import { useState } from "react";
 import axios from "axios";
-import { setLocalStorage } from "custom_module/function";
+import { setLocalStorage } from "custom_module";
 import clsx from "clsx";
-import styles from "pages/home/Home.module.css";
+import styles from "pages/Home.module.css";
 
 function Home() {
   let [province, setProvince] = useState("");
@@ -92,8 +92,12 @@ function getSchoolData({ province, level, name }) {
       if (!success) {
         throw new Error("존재하지 않는 학교입니다.");
       }
-      const { province, code } = res.data;
-      setLocalStorage([{ province: province }, { code: code }]);
+      const { province, code, level } = res.data;
+      setLocalStorage([
+        { province: province },
+        { code: code },
+        { level: level },
+      ]);
       window.location.href = "/";
     })
     .catch((err) => {

@@ -2,8 +2,7 @@ const axios = require("axios");
 
 const SchoolData = {
   getSchoolData: async (province, name, level) => {
-    baseUrl =
-      "https://open.neis.go.kr/hub/schoolInfo?KEY=c06a68753a51463aac97cfe9f043e8d2&Type=json&pindex=1&pSize100";
+    baseUrl = process.env.NEIS_API_SCHOOLINFO_URL;
     paramsUrl = `&ATPT_OFCDC_SC_CODE=${province}&SCHUL_NM=${name}&SCHUL_KND_SC_NM=${level}`;
     fetchUrl = encodeURI(baseUrl + paramsUrl);
     let schoolData = (await axios.get(fetchUrl)).data;
@@ -13,6 +12,7 @@ const SchoolData = {
         success: true,
         province: schoolData.ATPT_OFCDC_SC_CODE,
         code: schoolData.SD_SCHUL_CODE,
+        level: convertSchoolLevel(schoolData.SCHUL_KND_SC_NM),
       };
     } else {
       return {
@@ -21,5 +21,15 @@ const SchoolData = {
     }
   },
 };
+
+function convertSchoolLevel(level) {
+  if (level === "초등학교") {
+    return "els";
+  } else if (level === "중학교") {
+    return "mis";
+  } else {
+    return "his";
+  }
+}
 
 module.exports = SchoolData;

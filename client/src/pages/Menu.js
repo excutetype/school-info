@@ -1,5 +1,5 @@
-import SelectInfoBtn from "components/menu/SelectInfoBtn";
-import styles from "pages/menu/Menu.module.css";
+import SelectInfoBtn from "components/SelectInfoBtn";
+import styles from "pages/Menu.module.css";
 
 function Menu() {
   return (

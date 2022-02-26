@@ -1,7 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const ctrl = require("./ctrl");
+const control = require("./control");
 
-router.post("/api/schoolData", ctrl.process.setSchoolData);
+router.get("/api/cafeteria", control.getCafeteria);
+router.get("/api/schedule", control.getSchedule);
+
+router.post("/api/schoolData", control.setSchoolData);
 
 module.exports = router;

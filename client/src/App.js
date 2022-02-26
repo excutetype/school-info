@@ -1,14 +1,14 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Home from "pages/home/Home";
-import Menu from "pages/menu/Menu";
-import Cafeteria from "pages/info/Cafeteria";
-import Schedul from "pages/info/Schedule";
-import { isExistLocalStorage } from "custom_module/function";
+import Home from "pages/Home";
+import Menu from "pages/Menu";
+import Cafeteria from "pages/Cafeteria";
+import Schedul from "pages/Schedule";
+import { isExistLocalStorage } from "custom_module";
 import styles from "App.module.css";
 
 function App() {
   let isExistSchoolData = false;
-  if (isExistLocalStorage(["province", "code"])) {
+  if (isExistLocalStorage(["province", "code", "level"])) {
     isExistSchoolData = true;
   }
 
