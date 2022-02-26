@@ -9,9 +9,9 @@ const Cafeteria = {
     let cafeteria = (await axios.get(fetchUrl)).data;
     if (cafeteria.mealServiceDietInfo) {
       cafeteria = cafeteria.mealServiceDietInfo[1].row[0];
-      return cafeteria.DDISH_NM.replace(/[0-9.]/g, "");
+      return { success: true, data: cafeteria.DDISH_NM.replace(/[0-9.]/g, "") };
     } else {
-      return "급식 정보가<br/>존재하지 않습니다.";
+      return { success: false };
     }
   },
 };

@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import SchoolData from "pages/SchoolData";
 import Home from "pages/Home";
-import Menu from "pages/Menu";
 import Cafeteria from "pages/Cafeteria";
 import Schedul from "pages/Schedule";
 import { isExistLocalStorage } from "custom_module";
@@ -17,7 +17,10 @@ function App() {
       <div className={styles.contents}>
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={isExistSchoolData ? <Menu /> : <Home />} />
+            <Route
+              path="/"
+              element={isExistSchoolData ? <Home /> : <SchoolData />}
+            />
             <Route path="/cafeteria" element={<Cafeteria />} />
             <Route path="/schedule" element={<Schedul />} />
           </Routes>

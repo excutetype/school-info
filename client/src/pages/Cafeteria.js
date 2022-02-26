@@ -5,7 +5,10 @@ import styles from "pages/Cafeteria.module.css";
 import icon from "image/cafeteria_icon.png";
 
 function Cafeteria() {
-  let [cafeteria, setCafeteria] = useState("");
+  let [cafeteria, setCafeteria] = useState({
+    success: undefined,
+    data: undefined,
+  });
   let { province, code } = getLocalStorage(["province", "code"]);
   useEffect(async () => {
     try {
@@ -22,14 +25,22 @@ function Cafeteria() {
         <img className={styles.icon} src={icon} alt="cafeteria icon" />
       </div>
       <div className={styles.content}>
-        {cafeteria.split("<br/>").map((food, index) => {
-          return (
-            <span key={index}>
-              {food}
-              <br />
-            </span>
-          );
-        })}
+        {cafeteria.success ? (
+          cafeteria.split("<br/>").map((food, index) => {
+            return (
+              <span key={index}>
+                {food}
+                <br />
+              </span>
+            );
+          })
+        ) : (
+          <span>
+            급식 정보가
+            <br />
+            존재하지 않습니다.
+          </span>
+        )}
       </div>
     </div>
   );
