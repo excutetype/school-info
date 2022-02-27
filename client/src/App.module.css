@@ -2,7 +2,7 @@
   width: 100vw;
   height: 100vh;
   padding: 12px;
-  background-color: #5902ec;
+  background: linear-gradient(-45deg, #5902ec, #7a0bc0);
 }
 
 .contents {

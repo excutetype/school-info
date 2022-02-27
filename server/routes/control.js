@@ -14,8 +14,14 @@ const process = {
     res.send(response);
   },
   getSchedule: async (req, res) => {
-    const { province, code, level } = req.query;
-    const response = await schedule.getSchedule(province, code, level);
+    const { province, code, level, grade, classNM } = req.query;
+    const response = await schedule.getSchedule(
+      province,
+      code,
+      level,
+      grade,
+      classNM
+    );
     res.send(response);
   },
 };

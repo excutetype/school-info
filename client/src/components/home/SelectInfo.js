@@ -1,6 +1,7 @@
+import nextIcon from "image/next_icon.png";
 import styles from "./SelectInfo.module.css";
 
-function SelectInfoBtn({ text, description, pageLocation }) {
+function SelectInfoBtn({ text, pageLocation }) {
   return (
     <button
       className={styles.button}
@@ -9,8 +10,7 @@ function SelectInfoBtn({ text, description, pageLocation }) {
       }}
     >
       <span className={styles.text}>{text}</span>
-      <br />
-      <span className={styles.description}>{description}</span>
+      <img className={styles.icon} src={nextIcon} alt="go to the info page" />
     </button>
   );
 }

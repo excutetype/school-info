@@ -5,15 +5,15 @@ function Menu() {
   return (
     <div className={styles.menu}>
       <SelectInfo
-        text="급식표"
-        description="급식 메뉴를 알려줍니다."
+        text="오늘의 급식"
         pageLocation="/info?contentType=cafeteria"
       />
+      <hr className={styles.hr} />
       <SelectInfo
-        text="시간표"
-        description="금일 시간표를 알려줍니다."
+        text="오늘의 시간표"
         pageLocation="/info?contentType=schedule"
       />
+      <hr className={styles.hr} />
     </div>
   );
 }

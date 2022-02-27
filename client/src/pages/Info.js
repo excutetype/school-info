@@ -19,6 +19,8 @@ function Info() {
         "province",
         "code",
         "level",
+        "grade",
+        "classNM",
       ]);
       const data = getContentData({
         type: queryParams.contentType,
@@ -48,7 +50,7 @@ function getContentData({ type, urlParams }) {
     if (type === "cafeteria") {
       fetchUrl += `?province=${urlParams.province}&code=${urlParams.code}`;
     } else if (type === "schedule") {
-      fetchUrl += `?province=${urlParams.province}&code=${urlParams.code}&level=${urlParams.level}`;
+      fetchUrl += `?province=${urlParams.province}&code=${urlParams.code}&level=${urlParams.level}&grade=${urlParams.grade}&classNM=${urlParams.classNM}`;
     }
     axios
       .get(fetchUrl)

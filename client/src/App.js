@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import SchoolData from "pages/SchoolData";
+import SchoolData from "pages/SelectSchool";
 import Home from "pages/Home";
 import Info from "pages/Info";
 import { isExistLocalStorage } from "custom_module";
