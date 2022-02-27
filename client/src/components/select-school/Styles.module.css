@@ -10,12 +10,6 @@
   outline: 0 none;
 }
 
-.button {
-  background-color: #5d8bf4;
-  color: white;
-  cursor: pointer;
-}
-
 .inputBox {
   display: flex;
   justify-content: space-between;
@@ -29,4 +23,14 @@
   width: 49%;
   margin: 0px;
   font-size: 0.8rem;
+}
+
+.button {
+  background-color: #5d8bf4;
+  color: white;
+  cursor: pointer;
+}
+
+.button:active {
+  background-color: rgb(56, 108, 229);
 }

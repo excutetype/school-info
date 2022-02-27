@@ -4,6 +4,7 @@ import axios from "axios";
 import Icon from "components/info/Icon";
 import Cafeteria from "components/info/Cafeteria";
 import Schedule from "components/info/Schedule";
+import Back from "components/info/Back";
 import { getLocalStorage } from "custom_module";
 import styles from "./Info.module.css";
 
@@ -40,6 +41,7 @@ function Info() {
           contentData: contentData,
         })}
       </div>
+      <Back />
     </div>
   );
 }

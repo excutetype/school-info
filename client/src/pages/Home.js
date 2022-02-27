@@ -5,7 +5,7 @@ function Menu() {
   return (
     <div className={styles.menu}>
       <SelectInfo
-        text="오늘의 급식"
+        text="냠냠 맛있는 급식"
         pageLocation="/info?contentType=cafeteria"
       />
       <hr className={styles.hr} />
