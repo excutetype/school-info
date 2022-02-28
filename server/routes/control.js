@@ -1,12 +1,8 @@
-const page = require("../../client/build/index.html");
 const schoolData = require("../model/SchoolData");
 const cafeteria = require("../model/Cafeteria");
 const schedule = require("../model/Schedule");
 
 const process = {
-  showPage: (req, res) => {
-    res.send(page);
-  },
   getSchoolData: async (req, res) => {
     const { province, name, level } = req.query;
     const response = await schoolData.getSchoolData(province, name, level);
