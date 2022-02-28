@@ -3,7 +3,8 @@ const { getCurrentDate } = require("../custom_module");
 
 const Schedule = {
   getSchedule: async (province, code, _level, grade, classNM) => {
-    const baseUrl = process.env[`NEIS_API_SCHEDULE_${_level}_URL`];
+    const baseUrl =
+      process.env[`NEIS_API_SCHEDULE_${_level.toUpperCase()}_URL`];
     const paramsUrl = `&ATPT_OFCDC_SC_CODE=${province}&SD_SCHUL_CODE=${code}&ALL_TI_YMD=${getCurrentDate()}&GRADE=${grade}&CLASS_NM=${classNM}`;
     const fetchUrl = encodeURI(baseUrl + paramsUrl);
     let schedule = (await axios.get(fetchUrl)).data;

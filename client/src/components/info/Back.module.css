@@ -1,6 +1,8 @@
+.backBox {
+  margin-top: 40px;
+}
+
 .back {
-  position: absolute;
-  bottom: 0%;
   width: 90px;
   height: 32px;
   color: white;

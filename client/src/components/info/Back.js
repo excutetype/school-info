@@ -2,14 +2,16 @@ import styles from "./Back.module.css";
 
 function Back() {
   return (
-    <button
-      className={styles.back}
-      onClick={() => {
-        window.location.href = "/";
-      }}
-    >
-      MENU
-    </button>
+    <div className={styles.backBox}>
+      <button
+        className={styles.back}
+        onClick={() => {
+          window.location.href = "/";
+        }}
+      >
+        MENU
+      </button>
+    </div>
   );
 }
 

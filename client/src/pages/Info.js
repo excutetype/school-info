@@ -23,17 +23,20 @@ function Info() {
         "grade",
         "classNM",
       ]);
-      const data = getContentData({
-        type: queryParams.contentType,
-        urlParams: {
-          province: province,
-          code: code,
-          level: level,
-          grade: grade,
-          classNM: classNM,
-        },
-      });
-      setContentData(data);
+      async function setData() {
+        const data = await getContentData({
+          type: queryParams.contentType,
+          urlParams: {
+            province: province,
+            code: code,
+            level: level,
+            grade: grade,
+            classNM: classNM,
+          },
+        });
+        setContentData(data);
+      }
+      setData();
     } catch (err) {
       alert(err);
     }
