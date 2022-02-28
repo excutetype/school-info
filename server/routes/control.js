@@ -1,10 +1,13 @@
+const path = require("path");
 const schoolData = require("../model/SchoolData");
 const cafeteria = require("../model/Cafeteria");
 const schedule = require("../model/Schedule");
 
 const process = {
   showPage: (req, res) => {
-    res.send("hello!");
+    res.send(
+      express.static(path.join(__dirname, "../../client/build/index.html"))
+    );
   },
   getSchoolData: async (req, res) => {
     const { province, name, level } = req.query;
