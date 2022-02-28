@@ -16,7 +16,7 @@ function Info() {
   });
   useEffect(() => {
     try {
-      const { province, code, level } = getLocalStorage([
+      const { province, code, level, grade, classNM } = getLocalStorage([
         "province",
         "code",
         "level",
@@ -25,7 +25,13 @@ function Info() {
       ]);
       const data = getContentData({
         type: queryParams.contentType,
-        urlParams: { province: province, code: code, level: level },
+        urlParams: {
+          province: province,
+          code: code,
+          level: level,
+          grade: grade,
+          classNM: classNM,
+        },
       });
       setContentData(data);
     } catch (err) {
