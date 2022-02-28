@@ -1,3 +1,4 @@
+const page = require("../../client/build/index.html");
 const schoolData = require("../model/SchoolData");
 const cafeteria = require("../model/Cafeteria");
 const schedule = require("../model/Schedule");
