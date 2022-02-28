@@ -3,7 +3,7 @@
     "server": "cd server && nodemon server",
     "client": "cd client && yarn start",
     "dev-start": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
-    "start": "yarn server",
+    "start": "cd server && node server.js",
     "heroku-postbuild": "cd client && yarn install && yarn run build"
   },
   "dependencies": {
@@ -11,6 +11,7 @@
     "concurrently": "^7.0.0",
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
+    "heroku": "^7.59.2",
     "http-proxy-middleware": "^2.0.3"
   },
   "devDependencies": {
