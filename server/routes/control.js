@@ -5,9 +5,7 @@ const schedule = require("../model/Schedule");
 
 const process = {
   showPage: (req, res) => {
-    res.send(
-      express.static(path.join(__dirname, "../../client/build/index.html"))
-    );
+    res.sendFile(path.join(__dirname, "../../client/build/index.html"));
   },
   getSchoolData: async (req, res) => {
     const { province, name, level } = req.query;

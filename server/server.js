@@ -14,3 +14,5 @@ app.use("/", router);
 app.listen(process.env.PORT || "5000", () => {
   console.log("listening on 5000");
 });
+
+module.exports = express;
