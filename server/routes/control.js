@@ -4,7 +4,7 @@ const schedule = require("../model/Schedule");
 
 const process = {
   showPage: (req, res) => {
-    res.send("../../client/build/index.html");
+    res.send(page);
   },
   getSchoolData: async (req, res) => {
     const { province, name, level } = req.query;
