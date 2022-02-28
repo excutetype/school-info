@@ -2,7 +2,8 @@
   "scripts": {
     "server": "cd server && nodemon server",
     "client": "cd client && yarn start",
-    "start": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
+    "dev-start": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
+    "start": "yarn server",
     "heroku-postbuild": "cd client && yarn install && yarn run build"
   },
   "dependencies": {
