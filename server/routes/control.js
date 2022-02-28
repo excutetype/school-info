@@ -3,6 +3,9 @@ const cafeteria = require("../model/Cafeteria");
 const schedule = require("../model/Schedule");
 
 const process = {
+  showPage: (req, res) => {
+    res.send("hello");
+  },
   getSchoolData: async (req, res) => {
     const { province, name, level } = req.query;
     const response = await schoolData.getSchoolData(province, name, level);
