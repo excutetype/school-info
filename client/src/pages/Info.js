@@ -37,13 +37,12 @@ function Info() {
           },
         });
         setContentData(data);
+        setOnLoading(true);
       })();
-      setOnLoading(true);
     } catch (err) {
       alert(err);
     }
   }, [queryParams.contentType]);
-  console.log(onLoading);
   return (
     <div className={styles.Info}>
       <Icon iconName={queryParams.contentType} />
