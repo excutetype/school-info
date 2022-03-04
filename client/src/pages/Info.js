@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import queryString from "query-string";
 import axios from "axios";
+import Loading from "components/info/Loading";
 import Icon from "components/info/Icon";
 import Cafeteria from "components/info/Cafeteria";
 import Schedule from "components/info/Schedule";
@@ -14,6 +15,7 @@ function Info() {
     success: undefined,
     data: undefined,
   });
+  let [onLoading, setOnLoading] = useState(false);
   useEffect(() => {
     try {
       const { province, code, level, grade, classNM } = getLocalStorage([
@@ -23,7 +25,7 @@ function Info() {
         "grade",
         "classNM",
       ]);
-      async function setData() {
+      (async function setData() {
         const data = await getContentData({
           type: queryParams.contentType,
           urlParams: {
@@ -35,20 +37,25 @@ function Info() {
           },
         });
         setContentData(data);
-      }
-      setData();
+      })();
+      setOnLoading(true);
     } catch (err) {
       alert(err);
     }
   }, [queryParams.contentType]);
+  console.log(onLoading);
   return (
     <div className={styles.Info}>
       <Icon iconName={queryParams.contentType} />
       <div className={styles.content}>
-        {getContentJSX({
-          type: queryParams.contentType,
-          contentData: contentData,
-        })}
+        {onLoading ? (
+          getContentJSX({
+            type: queryParams.contentType,
+            contentData: contentData,
+          })
+        ) : (
+          <Loading />
+        )}
       </div>
       <Back />
     </div>

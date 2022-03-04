@@ -2,7 +2,7 @@ import styles from "./Schedule.module.css";
 
 function Info_Cafeteria({ success, contentData }) {
   return (
-    <div className={styles.content}>
+    <>
       {success ? (
         <table className={styles.scheduleTable}>
           <tbody>
@@ -25,7 +25,7 @@ function Info_Cafeteria({ success, contentData }) {
           존재하지 않습니다.
         </span>
       )}
-    </div>
+    </>
   );
 }
 

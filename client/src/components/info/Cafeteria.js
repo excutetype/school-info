@@ -1,8 +1,6 @@
-import styles from "./Cafeteria.module.css";
-
 function Info_Cafeteria({ success, contentData }) {
   return (
-    <div className={styles.content}>
+    <>
       {success ? (
         contentData.split("<br/>").map((food, index) => {
           return (
@@ -19,7 +17,7 @@ function Info_Cafeteria({ success, contentData }) {
           존재하지 않습니다.
         </span>
       )}
-    </div>
+    </>
   );
 }
 
