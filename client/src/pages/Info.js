@@ -4,17 +4,15 @@ import axios from "axios";
 import Loading from "components/info/Loading";
 import Icon from "components/info/Icon";
 import Cafeteria from "components/info/Cafeteria";
+import Timetable from "components/info/Timetable";
 import Schedule from "components/info/Schedule";
 import Back from "components/info/Back";
 import { getLocalStorage } from "custom_module";
 import styles from "./Info.module.css";
 
 function Info() {
-  const queryParams = queryString.parse(window.location.search);
-  let [contentData, setContentData] = useState({
-    success: undefined,
-    data: undefined,
-  });
+  const contentType = queryString.parse(window.location.search).contentType;
+  let [contentData, setContentData] = useState();
   let [onLoading, setOnLoading] = useState(false);
   useEffect(() => {
     try {
@@ -26,15 +24,12 @@ function Info() {
         "classNM",
       ]);
       (async function setData() {
-        const data = await getContentData({
-          type: queryParams.contentType,
-          urlParams: {
-            province: province,
-            code: code,
-            level: level,
-            grade: grade,
-            classNM: classNM,
-          },
+        const data = await getContentData(contentType, {
+          province: province,
+          code: code,
+          level: level,
+          grade: grade,
+          classNM: classNM,
         });
         setContentData(data);
         setOnLoading(true);
@@ -42,37 +37,38 @@ function Info() {
     } catch (err) {
       alert(err);
     }
-  }, [queryParams.contentType]);
+  }, [contentType]);
   return (
     <div className={styles.Info}>
-      <Icon iconName={queryParams.contentType} />
+      <Icon iconName={contentType} />
       <div className={styles.content}>
-        {onLoading ? (
-          getContentJSX({
-            type: queryParams.contentType,
-            contentData: contentData,
-          })
-        ) : (
-          <Loading />
-        )}
+        {onLoading ? getContentJSX(contentType, contentData) : <Loading />}
       </div>
       <Back />
     </div>
   );
 }
 
-function getContentData({ type, urlParams }) {
+function getContentData(type, urlParams) {
   return new Promise((resolve, reject) => {
     let fetchUrl = `/api/${type}`;
     if (type === "cafeteria") {
       fetchUrl += `?province=${urlParams.province}&code=${urlParams.code}`;
-    } else if (type === "schedule") {
+    } else if (type === "timetable") {
       fetchUrl += `?province=${urlParams.province}&code=${urlParams.code}&level=${urlParams.level}&grade=${urlParams.grade}&classNM=${urlParams.classNM}`;
+    } else if (type === "schedule") {
+      fetchUrl += `?province=${urlParams.province}&code=${urlParams.code}`;
     }
     axios
       .get(fetchUrl)
       .then((res) => {
-        resolve(res.data);
+        const response = res.data;
+        if (response.success) {
+          resolve(response.data);
+        } else {
+          alert("데이터 처리 중 오류가 발생하였습니다.");
+          window.location.href = "/";
+        }
       })
       .catch((err) => {
         reject(err);
@@ -80,15 +76,13 @@ function getContentData({ type, urlParams }) {
   });
 }
 
-function getContentJSX({ type, contentData }) {
+function getContentJSX(type, contentData) {
   if (type === "cafeteria") {
-    return (
-      <Cafeteria success={contentData.success} contentData={contentData.data} />
-    );
+    return <Cafeteria contentData={contentData} />;
+  } else if (type === "timetable") {
+    return <Timetable contentData={contentData} />;
   } else if (type === "schedule") {
-    return (
-      <Schedule success={contentData.success} contentData={contentData.data} />
-    );
+    return <Schedule contentData={contentData} />;
   }
 }
 

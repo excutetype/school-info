@@ -1,6 +1,7 @@
 const path = require("path");
 const schoolData = require("../model/SchoolData");
 const cafeteria = require("../model/Cafeteria");
+const timetable = require("../model/Timetable");
 const schedule = require("../model/Schedule");
 
 const process = {
@@ -17,15 +18,20 @@ const process = {
     const response = await cafeteria.getCafeteria(province, code);
     res.send(response);
   },
-  getSchedule: async (req, res) => {
+  getTimetable: async (req, res) => {
     const { province, code, level, grade, classNM } = req.query;
-    const response = await schedule.getSchedule(
+    const response = await timetable.getTimetable(
       province,
       code,
       level,
       grade,
       classNM
     );
+    res.send(response);
+  },
+  getSchedule: async (req, res) => {
+    const { province, code } = req.query;
+    const response = await schedule.getSchedule(province, code);
     res.send(response);
   },
 };

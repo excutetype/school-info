@@ -1,24 +1,53 @@
 const axios = require("axios");
-const { getCurrentDate } = require("../custom_module");
+const {
+  currentDateToFormatDate,
+  getCurrentDate,
+  getNextYearDate,
+} = require("../custom_module");
 
 const Schedule = {
-  getSchedule: async (province, code, _level, grade, classNM) => {
-    const baseUrl =
-      process.env[`NEIS_API_SCHEDULE_${_level.toUpperCase()}_URL`];
-    const paramsUrl = `&ATPT_OFCDC_SC_CODE=${province}&SD_SCHUL_CODE=${code}&ALL_TI_YMD=${getCurrentDate()}&GRADE=${grade}&CLASS_NM=${classNM}`;
+  getSchedule: async (province, code) => {
+    const baseUrl = `https://open.neis.go.kr/hub/SchoolSchedule?KEY=${process.env.NEIS_API_KEY}&Type=json&pindex=1&pSize100`;
+    const paramsUrl = `&ATPT_OFCDC_SC_CODE=${province}&SD_SCHUL_CODE=${code}&AA_FROM_YMD=${getCurrentDate()}&AA_TO_YMD=${getNextYearDate()}`;
     const fetchUrl = encodeURI(baseUrl + paramsUrl);
     let schedule = (await axios.get(fetchUrl)).data;
-    if (schedule[`${_level}Timetable`]) {
-      schedule = schedule[`${_level}Timetable`][1].row;
-      schedule = schedule.map((period) => {
-        return {
-          period: period.PERIO,
-          subject: period.ITRT_CNTNT.replace(/[-]/g, ""),
-        };
-      });
+    if (schedule.SchoolSchedule) {
+      schedule = schedule.SchoolSchedule[1].row
+        .filter((event) => {
+          if (
+            event.SBTR_DD_SC_NM === "공휴일" ||
+            event.SBTR_DD_SC_NM === "휴업일"
+          ) {
+            return false;
+          }
+          return true;
+        })
+        .map((event) => {
+          let result = {
+            title: event.EVENT_NM,
+            date: currentDateToFormatDate(event.AA_YMD),
+            grade: [],
+          };
+          const gradeTable = {
+            ONE: "1",
+            TW: "2",
+            THREE: "3",
+            FR: "4",
+            FIV: "5",
+            SIX: "6",
+          };
+          for (let grade in gradeTable) {
+            if (event[`${grade}_GRADE_EVENT_YN`] === "Y") {
+              result.grade.push(gradeTable[grade]);
+            }
+          }
+          return result;
+        });
       return { success: true, data: schedule };
+    } else if (schedule.RESULT.CODE === "INFO-200") {
+      return { success: true, data: null };
     } else {
-      return { success: false };
+      return { success: false, data: null };
     }
   },
 };

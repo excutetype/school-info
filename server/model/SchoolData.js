@@ -2,7 +2,7 @@ const axios = require("axios");
 
 const SchoolData = {
   getSchoolData: async (province, name, level) => {
-    baseUrl = process.env.NEIS_API_SCHOOLINFO_URL;
+    baseUrl = `https://open.neis.go.kr/hub/schoolInfo?KEY=${process.env.NEIS_API_KEY}&Type=json&pindex=1&pSize100`;
     paramsUrl = `&ATPT_OFCDC_SC_CODE=${province}&SCHUL_NM=${name}&SCHUL_KND_SC_NM=${level}`;
     fetchUrl = encodeURI(baseUrl + paramsUrl);
     let schoolData = (await axios.get(fetchUrl)).data;

@@ -4,6 +4,7 @@ const control = require("./control");
 
 router.get("/api/schoolData", control.getSchoolData);
 router.get("/api/cafeteria", control.getCafeteria);
+router.get("/api/timetable", control.getTimetable);
 router.get("/api/schedule", control.getSchedule);
 router.get("*", control.showPage);
 
