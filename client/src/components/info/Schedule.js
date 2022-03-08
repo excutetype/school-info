@@ -7,7 +7,7 @@ function Info_Shcedule({ contentData }) {
         contentData.map((event, index) => {
           return (
             <span key={index} className={styles.event}>
-              {event.title}: {event.date}
+              {event.name}: {event.date}
               <br />
             </span>
           );

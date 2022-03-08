@@ -62,16 +62,11 @@ function getContentData(type, urlParams) {
     axios
       .get(fetchUrl)
       .then((res) => {
-        const response = res.data;
-        if (response.success) {
-          resolve(response.data);
-        } else {
-          alert("데이터 처리 중 오류가 발생하였습니다.");
-          window.location.href = "/";
-        }
+        const contentData = res.data;
+        resolve(contentData);
       })
       .catch((err) => {
-        reject(err);
+        reject(err.response.data);
       });
   });
 }

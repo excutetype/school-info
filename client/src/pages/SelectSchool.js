@@ -25,7 +25,7 @@ function Home() {
         setValue={[setGrade, setclassNM]}
       />
       <SubmitButton
-        onClickEvent={getSchoolData}
+        onClickEvent={getSchoolSummaryData}
         eventParams={{
           province: province,
           level: level,
@@ -38,19 +38,16 @@ function Home() {
   );
 }
 
-function getSchoolData({ province, level, name, grade, classNM }) {
+function getSchoolSummaryData({ province, level, name, grade, classNM }) {
   if (!province || !level || !name || !grade || !classNM) {
     alert("입력 창을 확인하여 주십시오.");
     return;
   }
   axios
-    .get(`/api/schoolData?province=${province}&level=${level}&name=${name}`)
+    .get(`/api/schoolSummary?province=${province}&level=${level}&name=${name}`)
     .then((res) => {
-      const { success } = res.data;
-      if (!success) {
-        throw new Error("존재하지 않는 학교입니다.");
-      }
-      const { province, code, level } = res.data;
+      const schoolSummary = res.data;
+      const { province, code, level } = schoolSummary;
       setLocalStorage([
         { province: province },
         { code: code },
@@ -61,7 +58,7 @@ function getSchoolData({ province, level, name, grade, classNM }) {
       window.location.href = "/";
     })
     .catch((err) => {
-      alert(err);
+      alert(err.response.data);
     });
 }
 

@@ -2,7 +2,7 @@ function Info_Cafeteria({ contentData }) {
   return (
     <>
       {contentData ? (
-        contentData.split("<br/>").map((food, index) => {
+        contentData.map((food, index) => {
           return (
             <span key={index}>
               {food}
