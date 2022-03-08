@@ -5,7 +5,7 @@ import LevelSelect from "components/select-school/LevelSelect";
 import NameInput from "components/select-school/NameInput";
 import ClassroomInput from "components/select-school/ClassroomInput";
 import SubmitButton from "components/select-school/SubmitButton";
-import { setLocalStorage } from "custom_module";
+import { setLocalStorage } from "utils";
 import styles from "./SelectSchool.module.css";
 
 function Home() {

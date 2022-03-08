@@ -1,5 +1,5 @@
 const axios = require("axios");
-const { getCurrentDate } = require("../uitls");
+const { getCurrentDate } = require("../utils");
 const { ApiFetchError } = require("../errors/service");
 
 class Timetable {

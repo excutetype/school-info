@@ -7,7 +7,7 @@ import Cafeteria from "components/info/Cafeteria";
 import Timetable from "components/info/Timetable";
 import Schedule from "components/info/Schedule";
 import Back from "components/info/Back";
-import { getLocalStorage } from "custom_module";
+import { getLocalStorage } from "utils";
 import styles from "./Info.module.css";
 
 function Info() {

@@ -3,7 +3,7 @@ const {
   currentDateToFormatDate,
   getCurrentDate,
   getNextYearDate,
-} = require("../uitls");
+} = require("../utils");
 const { ApiFetchError } = require("../errors/service");
 
 class Schedule {
