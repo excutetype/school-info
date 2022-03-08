@@ -17,5 +17,5 @@
   font-weight: 400;
   line-height: 200%;
   text-align: center;
-  overflow-y: none;
+  overflow-y: scroll;
 }
