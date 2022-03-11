@@ -1,5 +1,9 @@
 const axios = require("axios");
-const { ApiFetchError, DataNotExistError } = require("../errors/service");
+const {
+  ApiFetchError,
+  DataNotExistError,
+  LackParamsError,
+} = require("../errors/service");
 
 class Schoolinfo {
   constructor(schoolinfoData) {
@@ -13,6 +17,7 @@ class Schoolinfo {
 
     const schoolSummaryData = {
       province: this.schoolinfoData.ATPT_OFCDC_SC_CODE,
+      name: this.schoolinfoData.SCHUL_NM,
       code: this.schoolinfoData.SD_SCHUL_CODE,
       level: convertSchoolLevel(this.schoolinfoData.SCHUL_KND_SC_NM),
     };
@@ -21,6 +26,10 @@ class Schoolinfo {
   }
 
   static build(province, name, level) {
+    if (!province || !name || !level) {
+      reject(new LackParamsError("학교 정보 요청에 필요한 인자가 부족합니다."));
+    }
+
     return new Promise((resolve, reject) => {
       const baseUrl = `https://open.neis.go.kr/hub/schoolInfo?KEY=${process.env.NEIS_API_KEY}&Type=json&pindex=1&pSize100`;
       const paramsUrl = `&ATPT_OFCDC_SC_CODE=${province}&SCHUL_NM=${name}&SCHUL_KND_SC_NM=${level}`;

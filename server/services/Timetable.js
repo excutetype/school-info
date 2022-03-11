@@ -1,6 +1,5 @@
 const axios = require("axios");
-const { getCurrentDate } = require("../utils");
-const { ApiFetchError } = require("../errors/service");
+const { ApiFetchError, LackParamsError } = require("../errors/service");
 
 class Timetable {
   constructor(timetableData) {
@@ -22,8 +21,12 @@ class Timetable {
     return timetable;
   }
 
-  static build(province, code, level, grade, classNM, date = getCurrentDate()) {
+  static build(province, code, level, grade, classNM, date) {
     return new Promise((resolve, reject) => {
+      if (!province || !code || !level || !grade || !classNM) {
+        reject(new LackParamsError("시간표 요청에 필요한 인자가 부족합니다."));
+      }
+
       const baseUrl = `https://open.neis.go.kr/hub/${level}Timetable?KEY=${process.env.NEIS_API_KEY}&Type=json&pindex=1&pSize100`;
       const paramsUrl = `&ATPT_OFCDC_SC_CODE=${province}&SD_SCHUL_CODE=${code}&ALL_TI_YMD=${date}&GRADE=${grade}&CLASS_NM=${classNM}`;
       const fetchUrl = encodeURI(baseUrl + paramsUrl);

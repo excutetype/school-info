@@ -1,0 +1,14 @@
+.selecter_box {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.image {
+  width: 35px;
+  filter: invert(0.8);
+}
+
+.selected {
+  filter: invert(1);
+}

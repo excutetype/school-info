@@ -1,30 +1,32 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import SchoolData from "pages/SelectSchool";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
+import Select from "pages/Select";
+import LocalStorage from "utils/LocalStroage";
 import Home from "pages/Home";
-import Info from "pages/Info";
-import { isExistLocalStorage } from "utils";
-import styles from "./App.module.css";
 
 function App() {
-  let isExistSchoolData = false;
-  if (isExistLocalStorage(["province", "code", "level"])) {
-    isExistSchoolData = true;
+  const schoolDataNames = [
+    "province",
+    "level",
+    "name",
+    "code",
+    "grade",
+    "classNM",
+  ];
+  let chooseSchool = false;
+  if (LocalStorage.isExist(schoolDataNames)) {
+    chooseSchool = true;
   }
 
   return (
-    <div className={styles.rootContainer}>
-      <div className={styles.contents}>
-        <BrowserRouter>
-          <Routes>
-            <Route
-              path="/"
-              element={isExistSchoolData ? <Home /> : <SchoolData />}
-            />
-            <Route path="info" element={<Info />} />
-          </Routes>
-        </BrowserRouter>
-      </div>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route
+          path="/"
+          element={chooseSchool ? <Home /> : <Navigate replace to="/select" />}
+        />
+        <Route path="/select" element={<Select />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

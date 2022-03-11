@@ -1,26 +1,40 @@
-import SelectInfo from "components/home/SelectInfo";
+import { useState } from "react";
+import Title from "components/home/Title";
+import Selecter from "components/home/Selecter";
+import Content from "components/home/Content";
+import LocalStorage from "utils/LocalStroage";
 import styles from "./Home.module.css";
 
-function Menu() {
+function Home() {
+  const [contentType, setContentType] = useState("cafeteria");
+
+  const schoolDataNames = [
+    "province",
+    "level",
+    "name",
+    "code",
+    "grade",
+    "classNM",
+  ];
+  const data = LocalStorage.get(schoolDataNames);
+
   return (
-    <div className={styles.menu}>
-      <SelectInfo
-        text="냠냠 맛있는 급식"
-        pageLocation="/info?contentType=cafeteria"
-      />
-      <hr className={styles.hr} />
-      <SelectInfo
-        text="오늘의 시간표"
-        pageLocation="/info?contentType=timetable"
-      />
-      <hr className={styles.hr} />
-      <SelectInfo
-        text="올해의 일정"
-        pageLocation="/info?contentType=schedule"
-      />
-      <hr className={styles.hr} />
+    <div className={styles.contents_box}>
+      <div className={styles.header}>
+        <Title name={data.name} grade={data.grade} classNM={data.classNM} />
+      </div>
+      <div className={styles.article}>
+        <Content type={contentType} reqParams={data} />
+      </div>
+      <div className={styles.footer}>
+        <Selecter
+          kind={["cafeteria", "timetable", "schedule"]}
+          onClickEvent={setContentType}
+          selected={contentType}
+        />
+      </div>
     </div>
   );
 }
 
-export default Menu;
+export default Home;

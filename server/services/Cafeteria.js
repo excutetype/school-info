@@ -1,6 +1,5 @@
 const axios = require("axios");
-const { getCurrentDate } = require("../utils");
-const { ApiFetchError } = require("../errors/service");
+const { ApiFetchError, LackParamsError } = require("../errors/service");
 
 class Cafeteria {
   constructor(cafeteriaData) {
@@ -19,7 +18,11 @@ class Cafeteria {
     return cafeteria;
   }
 
-  static build(province, code, date = getCurrentDate()) {
+  static build(province, code, date) {
+    if (!province || !code) {
+      reject(new LackParamsError("급식 메뉴 요청에 필요한 인자가 부족합니다."));
+    }
+
     return new Promise((resolve, reject) => {
       const baseUrl = `https://open.neis.go.kr/hub/mealServiceDietInfo?KEY=${process.env.NEIS_API_KEY}&Type=json&pindex=1&pSize100`;
       const paramsUrl = `&ATPT_OFCDC_SC_CODE=${province}&SD_SCHUL_CODE=${code}&MLSV_YMD=${date}`;

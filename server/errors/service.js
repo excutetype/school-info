@@ -12,4 +12,11 @@ class DataNotExistError extends Error {
   }
 }
 
-module.exports = { ApiFetchError, DataNotExistError };
+class LackParamsError extends Error {
+  constructor(message) {
+    super(message);
+    this.name = "lackParamsError";
+  }
+}
+
+module.exports = { ApiFetchError, DataNotExistError, LackParamsError };
