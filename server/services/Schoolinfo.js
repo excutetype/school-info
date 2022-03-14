@@ -26,11 +26,13 @@ class Schoolinfo {
   }
 
   static build(province, name, level) {
-    if (!province || !name || !level) {
-      reject(new LackParamsError("학교 정보 요청에 필요한 인자가 부족합니다."));
-    }
-
     return new Promise((resolve, reject) => {
+      if (!province || !name || !level) {
+        reject(
+          new LackParamsError("학교 정보 요청에 필요한 인자가 부족합니다.")
+        );
+      }
+
       const baseUrl = `https://open.neis.go.kr/hub/schoolInfo?KEY=${process.env.NEIS_API_KEY}&Type=json&pindex=1&pSize100`;
       const paramsUrl = `&ATPT_OFCDC_SC_CODE=${province}&SCHUL_NM=${name}&SCHUL_KND_SC_NM=${level}`;
       const fetchUrl = encodeURI(baseUrl + paramsUrl);

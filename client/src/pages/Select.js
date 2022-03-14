@@ -1,12 +1,12 @@
-import axios from "axios";
-import Panel from "components/select/Panel";
+import Form from "layouts/select";
 import LocalStorage from "utils/LocalStroage";
+import RequestData from "modules/RequestData";
 import styles from "./Select.module.css";
 
 function Select() {
   return (
     <div className={styles.contents_box}>
-      <Panel onSubmit={submitProcess} />
+      <Form onSubmit={submitProcess} />
     </div>
   );
 }
@@ -23,11 +23,11 @@ async function submitProcess(formData) {
     return;
   }
   try {
-    const summaryData = await getSchoolSummary(
-      formData.province,
-      formData.level,
-      formData.name
-    );
+    const summaryData = await RequestData.get("/api/schoolSummary", {
+      province: formData.province,
+      level: formData.level,
+      name: formData.name,
+    });
     LocalStorage.save([
       { province: summaryData.province },
       { level: summaryData.level },
@@ -40,23 +40,6 @@ async function submitProcess(formData) {
   } catch (err) {
     alert(err);
   }
-}
-
-function getSchoolSummary(province, level, name) {
-  return new Promise((resolve, reject) => {
-    axios
-      .get(
-        `/api/schoolSummary?province=${province}&level=${level}&name=${name}`
-      )
-      .then((res) => {
-        resolve(res.data);
-      })
-      .catch((err) => {
-        const status = err.response.status;
-        const message = err.response.data;
-        reject(`${status} Error!\n${message}`);
-      });
-  });
 }
 
 export default Select;

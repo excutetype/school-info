@@ -1,0 +1,13 @@
+.range_selecter {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.button {
+  background-color: white;
+  color: #4d77ff;
+  border: none;
+  font-size: 1rem;
+}

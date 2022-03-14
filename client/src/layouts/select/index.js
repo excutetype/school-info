@@ -1,10 +1,10 @@
 import { useState } from "react";
-import Province from "components/select/Province";
-import Level from "components/select/Level";
-import Name from "components/select/Name";
-import Classroom from "components/select/Classroom";
-import Submit from "components/select/Submit";
-import styles from "./Panel.module.css";
+import Province from "layouts/select/element/Province";
+import Level from "layouts/select/element/Level";
+import Name from "layouts/select/element/Name";
+import Classroom from "layouts/select/element/Classroom";
+import Submit from "layouts/select/element/Submit";
+import styles from "./index.module.css";
 
 function Panel({ onSubmit }) {
   const [formData, setFormData] = useState({

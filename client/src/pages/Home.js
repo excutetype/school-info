@@ -1,7 +1,10 @@
 import { useState } from "react";
-import Title from "components/home/Title";
-import Selecter from "components/home/Selecter";
-import Content from "components/home/Content";
+import Header from "layouts/home/title/Title";
+import Cafeteria from "layouts/home/contents/cafeteria/Cafeteria";
+import Timetable from "layouts/home/contents/timetable/Timetable";
+import Schedule from "layouts/home/contents/schedule/Schedule";
+import Selecter from "layouts/home/selecter/Selecter";
+
 import LocalStorage from "utils/LocalStroage";
 import styles from "./Home.module.css";
 
@@ -16,15 +19,25 @@ function Home() {
     "grade",
     "classNM",
   ];
-  const data = LocalStorage.get(schoolDataNames);
+  const storageData = LocalStorage.get(schoolDataNames);
 
   return (
     <div className={styles.contents_box}>
       <div className={styles.header}>
-        <Title name={data.name} grade={data.grade} classNM={data.classNM} />
+        <Header
+          name={storageData.name}
+          grade={storageData.grade}
+          classNM={storageData.classNM}
+        />
       </div>
       <div className={styles.article}>
-        <Content type={contentType} reqParams={data} />
+        {
+          {
+            cafeteria: <Cafeteria reqParams={storageData} />,
+            timetable: <Timetable reqParams={storageData} />,
+            schedule: <Schedule reqParams={storageData} />,
+          }[contentType]
+        }
       </div>
       <div className={styles.footer}>
         <Selecter

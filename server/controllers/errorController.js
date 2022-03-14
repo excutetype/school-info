@@ -6,6 +6,7 @@ const {
 
 module.exports = {
   errorHandler: (err, req, res, next) => {
+    console.log(err);
     if (err instanceof ApiFetchError) {
       res.status(500).send(err.message);
     } else if (err instanceof DataNotExistError) {

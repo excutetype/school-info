@@ -1,0 +1,9 @@
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.td {
+  padding: 10px 25px 10px 25px;
+  border-bottom: 1px solid gray;
+}
