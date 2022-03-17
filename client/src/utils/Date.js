@@ -15,6 +15,13 @@ class Date {
     return result;
   }
 
+  static getNextDate(range, format) {
+    let date = dayjs();
+    date = date.add(1, range);
+    const result = date.format(format);
+    return result;
+  }
+
   static convertFormat(originalDate, format) {
     const date = dayjs(originalDate);
     const result = date.format(format);

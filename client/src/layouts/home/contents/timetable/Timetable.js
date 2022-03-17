@@ -4,6 +4,7 @@ import TimetableBox from "./TimetableBox";
 import TimetableDate from "./TimetableDate";
 import TimetableText from "./TimetableText";
 import NoneTimetable from "./NoneTimetable";
+import Date from "utils/Date";
 import RequestData from "modules/RequestData";
 
 function Timetable({ reqParams }) {
@@ -12,7 +13,10 @@ function Timetable({ reqParams }) {
 
   useEffect(() => {
     setLoading(true);
-    RequestData.get("/api/timetable", reqParams)
+    RequestData.get("/api/timetable", {
+      ...reqParams,
+      date: Date.getCurrentDate("YYYYMMDD"),
+    })
       .then((res) => {
         setTimetableData(res);
         setLoading(false);

@@ -4,6 +4,7 @@ import ScheduleBox from "./ScheduleBox";
 import ScheduleRange from "./ScheduleRange";
 import ScheduleText from "./ScheduleText";
 import NoneSchedule from "./NoneSchedule";
+import Date from "utils/Date";
 import RequestData from "modules/RequestData";
 
 function Schedule({ reqParams }) {
@@ -13,7 +14,17 @@ function Schedule({ reqParams }) {
 
   useEffect(() => {
     setLoading(true);
-    RequestData.get("/api/schedule", { ...reqParams, toDate: scheduleRange })
+    let toDate = "";
+    if (scheduleRange === "day") {
+      toDate = Date.getCurrentDate("YYYYMMDD");
+    } else {
+      toDate = Date.getNextDate(scheduleRange, "YYYYMMDD");
+    }
+    RequestData.get("/api/schedule", {
+      ...reqParams,
+      fromDate: Date.getCurrentDate("YYYYMMDD"),
+      toDate: toDate,
+    })
       .then((res) => {
         setScheduleData(res);
         setLoading(false);
@@ -34,6 +45,7 @@ function Schedule({ reqParams }) {
           { text: "Month", value: "month" },
         ]}
         onClickEvent={setScheduleRange}
+        selectedValue={scheduleRange}
       />
       <hr />
       {scheduleData && scheduleData.length !== 0 ? (

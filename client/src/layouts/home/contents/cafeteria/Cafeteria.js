@@ -4,6 +4,7 @@ import CafeteriaBox from "./CafeteriaBox";
 import CafeteriaText from "./CafeteriaText";
 import NoneCafeteria from "./NoneCafeteria";
 import CafeteriaDate from "./CafeteriaDate";
+import Date from "utils/Date";
 import RequestData from "modules/RequestData";
 
 function Cafeteria({ reqParams }) {
@@ -12,7 +13,10 @@ function Cafeteria({ reqParams }) {
 
   useEffect(() => {
     setLoading(true);
-    RequestData.get("/api/cafeteria", reqParams)
+    RequestData.get("/api/cafeteria", {
+      ...reqParams,
+      date: Date.getCurrentDate("YYYYMMDD"),
+    })
       .then((res) => {
         setCafeteriaData(res);
         setLoading(false);
